@@ -321,7 +321,6 @@ function Indicators:OnEnable(frame)
 	end
 
 	if( config.indicators.pvp and config.indicators.pvp.enabled ) then
-		frame:RegisterUnitEvent("PLAYER_FLAGS_CHANGED", self, "UpdatePVPFlag")
 		frame:RegisterUnitEvent("UNIT_FACTION", self, "UpdatePVPFlag")
 		frame:RegisterUpdateFunc(self, "UpdatePVPFlag")
 
@@ -383,6 +382,10 @@ function Indicators:OnEnable(frame)
 	-- As they all share the function, register it as long as one is active
 	if( frame.indicators.leader or frame.indicators.masterLoot or frame.indicators.role ) then
 		frame:RegisterNormalEvent("GROUP_ROSTER_UPDATE", self, "GroupRosterUpdate")
+	end
+
+	if( frame.indicators.leader or frame.indicators.pvp ) then
+		frame:RegisterUnitEvent("PLAYER_FLAGS_CHANGED", self, "UpdateFlags")
 	end
 end
 

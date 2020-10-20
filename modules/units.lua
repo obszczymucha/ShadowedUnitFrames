@@ -1331,9 +1331,10 @@ local curableSpells = {
 	["PALADIN"] = {[1152] = {"Poison", "Disease"}, [4987] = {"Poison", "Disease", "Magic"}},
 	["SHAMAN"] = {[2870] = {"Disease"}, [8170] = {"Disease"}, [526] = {"Poison"}, [8166] = {"Poison"}, [51886] = {"Poison", "Disease", "Curse"}},
 	["MAGE"] = {[475] = {"Curse"}},
+	["WARLOCK"] = {[89808] = {"Magic"}},
 }
 
-curableSpells = curableSpells[select(2, UnitClass("player"))]
+curableSpells = curableSpells[playerClass]
 
 local function checkCurableSpells()
 	if( not curableSpells ) then return end
@@ -1341,7 +1342,7 @@ local function checkCurableSpells()
 	table.wipe(Units.canCure)
 
 	for spellID, cures in pairs(curableSpells) do
-		if( IsPlayerSpell(spellID) ) then
+		if( IsPlayerSpell(spellID) or IsSpellKnown(spellID, true) ) then
 			for _, auraType in pairs(cures) do
 				Units.canCure[auraType] = true
 			end

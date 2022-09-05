@@ -118,7 +118,6 @@ end
 function ShadowUF:CheckUpgrade()
 	local revisionClassic = self.db.profile.revisionClassic or (self.db.profile.revision and 1 or self.dbRevisionClassic)
 	local revision = self.db.profile.revision or self.dbRevision
-<<<<<<< HEAD
 	if( revisionClassic <= 4 or not self.db.profile.revisionClassic ) then
 		ShadowUF:LoadDefaultLayout(true)
 	end
@@ -137,17 +136,6 @@ function ShadowUF:CheckUpgrade()
 			end
 			if not happiness.anchorTo then
 				happiness.anchorTo = "$parent"
-=======
-	if (revision <= 61 ) then
-		if self.db.profile.bars.texture == "Smooth" then
-			self.db.profile.bars.texture = "Smoother"
-		end
-	end
-	if (revision <= 60 ) then
-		for unit, config in pairs(self.db.profile.units) do
-			if( unit == "player" or unit == "party" or unit == "target" or unit == "raid" or unit == "focus" or unit == "mainassist" or unit == "maintank" ) then
-				config.indicators.sumPending = {enabled = true, anchorPoint = "C", size = 40, x = 0, y = 0, anchorTo = "$parent"}
->>>>>>> 2bca6d3 (Conform to the statusbar textures of upstream SharedMedia)
 			end
 		end
 	end
